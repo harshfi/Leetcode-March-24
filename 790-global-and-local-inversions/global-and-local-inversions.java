@@ -12,6 +12,7 @@ class Solution {
         	
         	int idx=lowerBound(l , nums[i]);
         	cntg+=nums[i]-idx;
+            if(cntg>cnt) return false;
         	l.add(idx, nums[i]);
 //        	System.out.println(l);
 		}
