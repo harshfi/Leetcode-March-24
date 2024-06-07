@@ -7,6 +7,8 @@ class Solution {
         String ss="";
         String []s=se.split(" ");
 
+        StringBuilder sb=new StringBuilder();
+
         for(String i: s){
             int t=0;
             for(int j=0;j<i.length();j++){
@@ -14,13 +16,13 @@ class Solution {
 
                  if(set.contains(str)){
                    t=1;
-                   ss=ss+" "+str;
+                   sb.append(" "+str);
                    break;
                  }
             }
-            if(t==0)ss=ss+" "+i;
+            if(t==0)sb.append(" "+i);
         }
-        return ss.trim();
+        return sb.toString().trim();
 
         
     }
