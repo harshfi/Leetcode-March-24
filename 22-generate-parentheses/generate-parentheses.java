@@ -11,10 +11,12 @@ class Solution {
             list.add(s);
             return;
         }
+         if(open>close)find(n,open,close+1,s+")");
         if(open<n){
             find(n,open+1,close,s+"(");
 
         }
-        if(open>close)find(n,open,close+1,s+")");
+
+       
     }
 }
