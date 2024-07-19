@@ -3,7 +3,7 @@ class Solution {
         int row=findRow(matrix,target);
         if(row==-1)return false;
         int s=0;
-        int e=matrix[0].length;
+        int e=matrix[0].length-1;
 
         while(s<=e){
          int mid=(s+e)/2;
