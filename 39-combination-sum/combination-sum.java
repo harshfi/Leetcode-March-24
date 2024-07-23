@@ -1,22 +1,21 @@
 class Solution {
     List<List<Integer>> list;
-    public List<List<Integer>> combinationSum(int[] candidate, int target) {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
         list=new ArrayList<>();
-        find(candidate,target,new ArrayList<>(),0);
+        combSum(candidates,target,0,new ArrayList<>());
         return list;
         
     }
-    public void find(int candidate[],int target,List<Integer> l,int s){
+    public void combSum(int []coins,int target,int s, List<Integer> ll){
         if(target==0){
-            list.add(new ArrayList<>(l));
-            return;
+              list.add(new ArrayList<>(ll));
+              return;
         }
-
-        for(int i=s;i<candidate.length;i++){
-            if(candidate[i]<=target){
-                l.add(candidate[i]);
-                find(candidate,target-candidate[i],l,i);
-                l.remove(l.size()-1);
+        for(int i=s;i<coins.length;i++){
+            if(target>=coins[i]){
+                ll.add(coins[i]);
+                combSum(coins,target-coins[i],i,ll);
+                ll.remove(ll.size()-1);
             }
         }
     }
