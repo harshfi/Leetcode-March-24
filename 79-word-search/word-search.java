@@ -1,33 +1,31 @@
 class Solution {
     public boolean exist(char[][] board, String word) {
+        int v[][]=new int [board.length][board[0].length];
         for(int i=0;i<board.length;i++){
             for(int j=0;j<board[0].length;j++){
-               
-                  boolean v[][]=new boolean[board.length][board[0].length];
-                  boolean ans=  find(board,word,i,j,0,v);
-                  if(ans==true)return true;
-                
+                boolean check=Find(board,word,v,0,i,j);
+                if(check==true) return true;
             }
         }
         return false;
-        
     }
-    public boolean find(char[][]board,String word,int i,int j,int idx,boolean v[][]){
-        if(idx==word.length()){
-            return true;
+    public boolean Find(char [][]board,String word,int v[][],int idx,int row,int col){
+        if(idx==word.length()) return true;
+        
+        if(col<0 ||col>=board[0].length || row<0 ||
+         row>=board.length||v[row][col]==1|| board[row][col]!= word.charAt(idx)) {
+            return false;
         }
-        if(i<0 || j<0 ||i>=board.length || j>=board[0].length|| v[i][j] ||board[i][j]!=word.charAt(idx)) return false;
 
-      
-            v[i][j]=true;
-           boolean down= find(board,word,i+1,j,idx+1,v);
-           boolean up= find(board,word,i-1,j,idx+1,v);
-           boolean right= find(board,word,i,j+1,idx+1,v);
-           boolean left= find(board,word,i,j-1,idx+1,v);
-           v[i][j]=false;
-           return down||up||right||left;
+        v[row][col]=1;
 
-        
-        
+        boolean left= Find(board,word,v,idx+1,row,col-1);
+        boolean right= Find(board,word,v,idx+1,row,col+1);
+        boolean up= Find(board,word,v,idx+1,row-1,col);
+        boolean down= Find(board,word,v,idx+1,row+1,col);
+
+        v[row][col]=0;
+        return left|| right|| up||down;
+
     }
 }
