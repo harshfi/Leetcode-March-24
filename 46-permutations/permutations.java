@@ -1,25 +1,22 @@
 class Solution {
-    List<List<Integer>> list= new ArrayList<>();
+    List<List<Integer>> list;
     public List<List<Integer>> permute(int[] nums) {
-        int []v=new int[nums.length];
-        find(nums,v,new ArrayList<>());
+        list=new ArrayList<>();
+        per(nums,new ArrayList<>());
         return list;
-        
+
     }
-    public void find(int num[],int v[],List<Integer> l){
-        if(l.size()==num.length){
+    public void per (int num[],List<Integer> l){
+        if(num.length==l.size()){
             list.add(new ArrayList<>(l));
-            return;
+            return ;
         }
         for(int i=0;i<num.length;i++){
-            if(v[i]==0){
+            if(l.contains(num[i])==false){
                 l.add(num[i]);
-                v[i]=1;
-                find(num,v,l);
+                per(num,l);
                 l.remove(l.size()-1);
-                v[i]=0;
             }
         }
     }
-
 }
