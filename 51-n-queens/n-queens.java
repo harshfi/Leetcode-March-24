@@ -1,62 +1,65 @@
 class Solution {
-    List<List<String>> list=new ArrayList<>();
+    List<List<String>> list;
     public List<List<String>> solveNQueens(int n) {
-        int ch[][]=new int [n][n];
-        Queen(0,n,ch);
+        list=new ArrayList<>();
+        int board[][]=new int[n][n];
+        find(board,n,0);
         return list;
-        
-       
     }
-    public void Queen(int row,int n,int ch[][]){
-        if(row==n){
+    public void find(int board[][],int n,int row){
+        if(n==0){
             List<String> l=new ArrayList<>();
-             for(int i=0;i<n;i++){
-                String s="";
-            for(int j=0;j<n;j++){
-                if(ch[i][j]==1) s+='Q';
-                else s+='.';
+            for(int i=0;i<board.length;i++){
+                String str="";
+                for(int j=0;j<board.length;j++){
+                    if(board[i][j]==1)str+="Q";
+                    else str+='.';
+                }
+                l.add(str);
             }
-            l.add(s);
-        }
-        // System.out.println("yes");
-        if(!list.contains(l))
-        list.add(new ArrayList<>(l));
-        
+            list.add(new ArrayList<>(l));
             return ;
+
         }
-        for(int i=0;i<n;i++){
-            if(isSafe(row,i,ch)){
-                ch[row][i]=1;
-                Queen(row+1,n,ch);
-                ch[row][i]=0;
+        for(int i=0;i<board.length;i++){
+            if(isSafe(board,row,i)){
+                board[row][i]=1;
+                find(board,n-1,row+1);
+                board[row][i]=0;
             }
         }
-     
     }
-    public static boolean isSafe(int row,int col,int ch[][]){
-        
-        //diagonal
-        int r=row,c=col;
+    public boolean isSafe(int board[][],int row,int col){
+        //left dia
+        int r=row;
+        int c=col;
         while(r>=0 && c>=0){
-            if(ch[r][c]==1) return false;
+            if(board[r][c]==1){
+                return false;
+            }
             r--;
             c--;
         }
-        //col
+        //right dia
         r=row;
-        while(r>=0){
-            if(ch[r][col]==1) return false;
+        c=col;
+        while(r>=0 && c<board.length){
+            if(board[r][c]==1){
+                return false;
+            }
             r--;
+            c++;
         }
-        r = row;
-		c = col;
-		while (r >= 0 && c < ch.length) {
-			if (ch[r][c] == 1) {
-				return false;
-			}
-			r--;
-			c++;
-		}
+        //vertical
+         r=row;
+        c=col;
+        while(r>=0){
+            if(board[r][c]==1){
+                return false;
+            }
+            r--;
+
+        }
         return true;
     }
 }
