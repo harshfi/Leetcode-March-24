@@ -1,22 +1,21 @@
 class Solution {
     List<String> list;
     public List<String> generateParenthesis(int n) {
-        list=new ArrayList<>();
-        find(n,0,0,"");
+        list= new ArrayList<>();
+        par(n,0,0,"");
         return list;
         
     }
-    public void find(int n,int open,int close,String s){
-        if(open==n &&close==n){
-            list.add(s);
-            return;
-        }
-         if(open>close)find(n,open,close+1,s+")");
-        if(open<n){
-            find(n,open+1,close,s+"(");
-
-        }
-
-       
-    }
+    public  void par(int n,int open,int close,String ans) {
+		if(open==n && close==n) {
+			list.add(ans);
+			return;
+		}
+		if(open>n || close > n) return;
+		
+		if(open<n)
+		par(n,open+1,close,ans+"(");
+		if(close<open)
+		par(n,open,close+1,ans+")");
+	}
 }
