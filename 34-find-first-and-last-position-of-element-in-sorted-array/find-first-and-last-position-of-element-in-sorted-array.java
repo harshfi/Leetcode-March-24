@@ -6,7 +6,7 @@ class Solution {
         return a;
     }
     public static int LowerBound(int nums[], int target){
-        if(nums.length>=1 && nums[0]>target) return -1;
+        // if(nums.length>=1 && nums[0]>target) return -1;
 
         int i=0,e=nums.length-1;
         int ans=-1;
@@ -23,7 +23,7 @@ class Solution {
         return ans;
     }
     public static int UpperBound(int nums[], int target){
-        if(nums.length>=1 &&nums[nums.length-1]<target) return -1;
+        // if(nums.length>=1 &&nums[nums.length-1]<target) return -1;
 
         int i=0,e=nums.length-1;
         int ans=-1;
