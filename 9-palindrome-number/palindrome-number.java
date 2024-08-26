@@ -9,7 +9,7 @@ class Solution {
             rev = (rev*10) + rem ;
             x /= 10;
         }
-        System.out.println(rev+" "+temp);
+       
         return rev==temp;
     }
 }
