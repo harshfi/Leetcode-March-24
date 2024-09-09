@@ -1,21 +1,26 @@
 class Solution {
-    List<String> list;
+    static List<String> l;
     public List<String> generateParenthesis(int n) {
-        list= new ArrayList<>();
-        par(n,0,0,"");
-        return list;
-        
+        l= new ArrayList<>();
+        genrate(n,0,0,"");
+        return l;
     }
-    public  void par(int n,int open,int close,String ans) {
+    public static void genrate(int n,int open,int close,String ans) {
 		if(open==n && close==n) {
-			list.add(ans);
+			l.add(ans);
 			return;
 		}
-		if(open>n || close > n) return;
+		
+		if(open> n || close >n)return;
+		
+		//  (
 		
 		if(open<n)
-		par(n,open+1,close,ans+"(");
+		genrate(n,open+1,close, ans+"(");
+		//  )
+		
 		if(close<open)
-		par(n,open,close+1,ans+")");
+		genrate(n,open,close+1,ans+")");
 	}
+
 }
