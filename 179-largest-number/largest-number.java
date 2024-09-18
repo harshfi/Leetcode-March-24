@@ -10,7 +10,7 @@ class Solution {
         if(s[0].compareTo("0")==0)return "0";
        StringBuilder sb = new StringBuilder();
        for (int i = 0;i<nums.length;i++) {
-    	   System.out.println(s[i]+" ");
+    	//    System.out.println(s[i]+" ");
     	   sb.append(s[i]);
 
 	}
