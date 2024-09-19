@@ -11,7 +11,7 @@ class Solution {
                 // Compute left and right parts recursively
                 List<Integer> leftResults = diffWaysToCompute(expression.substring(0, i));
                 List<Integer> rightResults = diffWaysToCompute(expression.substring(i + 1));
-                System.out.println(leftResults+" "+rightResults);
+                // System.out.println(leftResults+" "+rightResults);
                 // Combine the results from both parts
                 for (int left : leftResults) {
                     for (int right : rightResults) {
