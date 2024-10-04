@@ -1,29 +1,25 @@
 class Solution {
-    public int countNegatives(int[][] grid) {
+    public int countNegatives(int[][] a) {
         int count=0;
-        for(int i=0;i<grid.length;i++){
-           count+=rowBinary(grid,i);
-        }
+		for (int row = 0; row < a.length; row++) {
+			int idxNeg= find(a[row]);
+			count=count+(a[row].length-idxNeg);
+		}
         return count;
     }
-
-    public static int rowBinary(int [][]grid, int row){
-        if(grid[row][0]<0) return grid[0].length;
-        int i=0;
-        int e=grid[0].length-1;
-        int mid=0;
-        int ans=0;
-        while(i<=e){
-           mid=(i+e)/2;
-    
-            if(grid[row][mid]<0){
-               ans=grid[0].length-mid;
-               e=mid-1;
-            }
-            else i=mid+1;
-        }
-        return ans;
-
-    }
-
+    public static int find(int []arr) {
+		if(arr[0]<0) return 0;
+		int ans=arr.length;
+		int s=0;
+		int e= arr.length-1;
+		while(s<=e) {
+			int mid=(s+e)/2;
+			if(arr[mid]<0) {
+				ans=mid;
+				e=mid-1;
+			}
+			else s=mid+1;
+		}
+		return ans;
+	}
 }
