@@ -1,5 +1,5 @@
 class Solution {
-    int min=Integer.MAX_VALUE;
+    
     public int minimumTotal(List<List<Integer>> t) {
         int dp[][]=new int[t.size()][];
         for(int i=0;i<t.size();i++){
@@ -7,7 +7,7 @@ class Solution {
             Arrays.fill(dp[i],1000000);
         }
        int x=find(t,0,0, dp);
-       print(dp);
+    //    print(dp);
        return x; 
     }
     public void print(int dp[][]){
