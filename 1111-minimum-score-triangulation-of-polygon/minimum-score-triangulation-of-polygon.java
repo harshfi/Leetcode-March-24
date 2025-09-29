@@ -8,7 +8,7 @@ class Solution {
                 for(int k=i+1;k<j;k++){
                     ans=Math.min(ans,v[i]*v[k]*v[j]+dp[i][k]+dp[k][j]); 
                 }
-                System.out.println(ans);
+                // System.out.println(ans);
                 dp[i][j]=ans;
             }
          }
