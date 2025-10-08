@@ -38,7 +38,7 @@ class Twitter {
     }
 
     public void unfollow(int followerId, int followeeId) {
-        if (followerQ.containsKey(followerId) )
+       
             followerQ.get(followerId).remove(followeeId);
     }
 }
