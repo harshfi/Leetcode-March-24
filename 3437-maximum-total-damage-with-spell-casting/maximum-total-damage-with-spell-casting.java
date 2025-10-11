@@ -4,7 +4,7 @@ class Solution {
     public long maximumTotalDamage(int[] power) {
         if (power == null || power.length == 0) return 0L;
 
-        Arrays.sort(power);
+       
         TreeMap<Integer, Integer> freq = new TreeMap<>();
         for (int p : power) freq.put(p, freq.getOrDefault(p, 0) + 1);
 
