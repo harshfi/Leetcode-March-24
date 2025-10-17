@@ -3,7 +3,7 @@
  * @return {number[]}
  */
 var lexicalOrder = function(n) {
-    let arr=[];
+    let arr=[]
     for(let i=1;i<=n;i++){
         arr.push(i);
     }
