@@ -11,7 +11,7 @@ class Solution {
     }
    public static boolean find(int[][] grid, int row, int col) {
 
-    if (grid[row+1][col+1] != 5) return false;
+    // if (grid[row+1][col+1] != 5) return false;
 
     int[] arr = new int[10];
 
