@@ -1,69 +1,52 @@
 class Solution {
-       public static int numMagicSquaresInside(int[][] grid) {
-    	  int cnt=0;
-    	  for (int i = 0; i+2 < grid.length; i++) {
-    		  
-			for (int j = 0; j+2 < grid[0].length; j++) {
-				
-				if(check(i,j,grid)) {
-					cnt++;
-				}
-			}
-		}
-    	  return cnt;
-        
+    public int numMagicSquaresInside(int[][] grid) {
+        int cnt=0;
+        for(int i=0;i<=grid.length-3;i++){
+            for(int j=0;j<=grid[0].length-3;j++){
+                boolean check=find(grid,i,j);
+                if(check)cnt++;
+            }
+        }
+        return cnt;
     }
-      public static boolean check(int r,int c,int [][]a) {
-    	  int sum=0;
-    	  //distinct number
-    	  int b[]= new int [16];
-    	  for (int i = r; i < r+3; i++) {
-			for (int j = c; j < c+3; j++) {
-				if(a[i][j]==0 || a[i][j]>=10)return false;
-				else if(b[a[i][j]]==1) return false;
-				else b[a[i][j]]++;
-			}
-		}
-    	  for (int i = r; i < r+3; i++) {
-			sum+= a[i][c];
-		}
-    	  //row
-    	  for(int i=r;i<r+3;i++) {
-    		  int csum=0;
-    		  for (int j = c; j <c+3; j++) {
-				csum+=a[i][j];
-			}
-    		  if(sum!=csum)return false;
-    	  }
-    	  
-    	  
-    	  
-    	  //col
-    	  
-    	  for (int i = c; i < c+3; i++) {
-    		  int csum=0;
-    		  for (int j = r; j <r+3; j++) {
-				csum+=a[j][i];
-			}
-    		  if(sum!=csum)return false;
-		}
-    	  //dia left-right
-    	  
-    	  int i=r,j=c;
-    	  int csum=0;
-    	  while(i<r+3 && j<c+3) {
-    		  csum+=a[i++][j++];
-    	  }
-    	  if(sum!=csum)return false;
-    			  
-    	  i=r;
-    	  j=c+2;
-    	  csum=0;
-    	  while(i<r+3 && j>=c)csum+=a[i++][j--];
-    	  if(sum!=csum)return false;
-    	  
-    	  return true;
-      }
+   public static boolean find(int[][] grid, int row, int col) {
 
+    if (grid[row+1][col+1] != 5) return false;
+
+    int[] arr = new int[10];
+
+    for (int i = row; i < row + 3; i++) {
+        for (int j = col; j < col + 3; j++) {
+            if (grid[i][j] < 1 || grid[i][j] > 9) return false;
+            if (++arr[grid[i][j]] > 1) return false;
+        }
+    }
+
+    int sum = 0;
+    for (int j = col; j < col + 3; j++) {
+        sum += grid[row][j];
+    }
+
+    for (int i = row; i < row + 3; i++) {
+        int rowSum = 0;
+        for (int j = col; j < col + 3; j++) {
+            rowSum += grid[i][j];
+        }
+        if (rowSum != sum) return false;
+    }
+
+    for (int j = col; j < col + 3; j++) {
+        int colSum = 0;
+        for (int i = row; i < row + 3; i++) {
+            colSum += grid[i][j];
+        }
+        if (colSum != sum) return false;
+    }
+
+    if (grid[row][col] + grid[row+1][col+1] + grid[row+2][col+2] != sum) return false;
+    if (grid[row][col+2] + grid[row+1][col+1] + grid[row+2][col] != sum) return false;
+
+    return true;
+}
 
 }
