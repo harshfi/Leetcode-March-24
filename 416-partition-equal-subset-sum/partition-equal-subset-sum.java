@@ -1,25 +1,29 @@
 class Solution {
     public boolean canPartition(int[] nums) {
-        int sum = 0;
-        for (int i : nums) sum += i;
-        if (sum % 2 != 0) return false;
+        
+        int sum=0;
 
-        int n = nums.length;
-        int target = sum / 2;
-        boolean[][] dp = new boolean[n + 1][target + 1];
-
-        dp[0][0] = true;
-        for (int i = 1; i <= n; i++) {
-            dp[i][0] = true;              // zero sum is always possible
-            int val = nums[i - 1];        // i-th row corresponds to nums[i-1]
-            for (int s = 1; s <= target; s++) {
-                dp[i][s] = dp[i - 1][s];  // don't take nums[i-1]
-                if (s - val >= 0 && dp[i - 1][s - val]) {
-                    dp[i][s] = true;     // take nums[i-1]
-                }
-            }
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
         }
+        if(sum%2!=0)return false;
 
-        return dp[n][target];
+        Boolean dp[][]= new Boolean[nums.length][(sum/2) +1];
+
+
+        return find(sum/2,nums,nums.length-1,dp);
+    }
+    public static boolean find(int target, int nums[],int i,Boolean dp[][]){
+         
+          if(target==0)return true;
+         if(i==-1|| target<0)return false;
+       
+
+        if(dp[i][target]!=null)return dp[i][target];
+        boolean in=find(target-nums[i],nums,i-1,dp);
+        boolean ex=find(target,nums,i-1,dp);
+
+        //   true;
+        return dp[i][target]= in||ex;
     }
 }
