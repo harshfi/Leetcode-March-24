@@ -1,37 +1,28 @@
-import java.util.*;
-
 class Solution {
     public long rob(int[] nums, int[] colors) {
 
         int n = nums.length;
-        long[][] dp = new long[n][2];
+        if (n == 1) return nums[0];
 
-        for (long[] row : dp)
-            Arrays.fill(row, -1);
+        long prev2 = 0;          // dp[i-2]
+        long prev1 = nums[0];    // dp[i-1]
 
-        return find(nums, colors, 0, false, dp);
-    }
+        for (int i = 1; i < n; i++) {
 
-    public long find(int[] nums, int[] colors, int i, boolean prevTaken, long[][] dp) {
+            long take;
 
-        if (i == nums.length)
-            return 0;
+            if (colors[i] != colors[i - 1]) {
+                take = nums[i] + prev1;
+            } else {
+                take = nums[i] + prev2;
+            }
 
-        int prev = prevTaken ? 1 : 0;
+            long curr = Math.max(prev1, take);
 
-        if (dp[i][prev] != -1)
-            return dp[i][prev];
-
-        long take = 0;
-
-        // Can take if previous wasn't taken OR colors differ
-        if (!prevTaken || colors[i] != colors[i - 1]) {
-            take = nums[i] + find(nums, colors, i + 1, true, dp);
+            prev2 = prev1;
+            prev1 = curr;
         }
 
-        long notTake = find(nums, colors, i + 1, false, dp);
-
-        dp[i][prev] = Math.max(take, notTake);
-        return dp[i][prev];
+        return prev1;
     }
 }
